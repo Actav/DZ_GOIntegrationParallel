@@ -9,7 +9,12 @@ import (
 )
 
 func main() {
-	s := storage.NewInMemoryStorage()
+	//s := storage.NewInMemoryStorage()
+	s, err := storage.NewSQLiteStorage("_files/users.db")
+	if err != nil {
+		log.Fatal("Failed to create storage:", err)
+	}
+
 	h := handlers.Handlers{Storage: s}
 	r := chi.NewRouter()
 
